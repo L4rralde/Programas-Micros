@@ -1,0 +1,10 @@
+
+# 1 "pause.c"
+
+# 1 "msecbase.h"
+void msecbase( void );
+
+# 3 "pause.c"
+void pause( unsigned short msvalue ){
+for (unsigned short x=0; x<=msvalue; x++) msecbase();
+}

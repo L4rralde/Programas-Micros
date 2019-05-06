@@ -1,0 +1,1 @@
+void pause( unsigned short usvalue );

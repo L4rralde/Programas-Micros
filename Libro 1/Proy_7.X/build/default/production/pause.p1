@@ -1,0 +1,28 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"1 msecbase.h
+[v _msecbase `(v  0 ef ]
+[; ;msecbase.h: 1: void msecbase( void );
+"3 pause.c
+[v _pause `(v  1 ef1`us ]
+{
+[; ;pause.c: 3: void pause( unsigned short msvalue ){
+[e :U _pause ]
+[v _msvalue `us  1 r1 ]
+[f ]
+[; ;pause.c: 4: for (unsigned short x=0; x<=msvalue; x++) msecbase();
+"4
+{
+[v _x `us  1 a ]
+[e = _x -> -> 0 `i `us ]
+[e $U 5  ]
+[e :U 2 ]
+[e ( _msecbase ..  ]
+[e ++ _x -> -> 1 `i `us ]
+[e :U 5 ]
+[e $ <= -> _x `ui -> _msvalue `ui 2  ]
+[e :U 3 ]
+}
+[; ;pause.c: 5: }
+"5
+[e :UE 1 ]
+}
