@@ -1,0 +1,572 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.82 build 9453 
+                                                                                               Sun May 05 21:37:06 2019
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 9453
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 9453"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           # 3 "main.c"
+    43                           	psect config,class=CONFIG,delta=2 ;#
+    44                           # 3 "main.c"
+    45  2007  E0D4               	dw 0xFFFC & 0xFFF7 & 0xFFFF & 0xFFDF & 0xFFFF & 0xFFFF & 0xFCFF & 0xFBFF & 0xF7FF & 0xE
+                                 FFF & 0xFFFF ;#
+    46                           # 4 "main.c"
+    47                           	psect config,class=CONFIG,delta=2 ;#
+    48                           # 4 "main.c"
+    49  2008  FFFF               	dw 0xFFFF & 0xFFFF ;#
+    50                           	FNCALL	_main,_pause
+    51                           	FNCALL	_pause,_msecbase
+    52                           	FNROOT	_main
+    53                           	global	_PORTB
+    54                           psect	text82,local,class=CODE,delta=2
+    55                           global __ptext82
+    56  0000                     __ptext82:
+    57  0006                     _PORTB	set	6
+    58                           	global	_PORTC
+    59  0007                     _PORTC	set	7
+    60                           	global	_TMR0
+    61  0001                     _TMR0	set	1
+    62                           	global	_CARRY
+    63  0018                     _CARRY	set	24
+    64                           	global	_GIE
+    65  005F                     _GIE	set	95
+    66                           	global	_RC0
+    67  0038                     _RC0	set	56
+    68                           	global	_RC1
+    69  0039                     _RC1	set	57
+    70                           	global	_T0IF
+    71  005A                     _T0IF	set	90
+    72                           	global	_OPTION_REG
+    73  0081                     _OPTION_REG	set	129
+    74                           	global	_TRISB
+    75  0086                     _TRISB	set	134
+    76                           	global	_TRISC
+    77  0087                     _TRISC	set	135
+    78                           	global	_EEADR
+    79  010D                     _EEADR	set	269
+    80                           	global	_EEDATA
+    81  010C                     _EEDATA	set	268
+    82                           	global	_ANSEL
+    83  0188                     _ANSEL	set	392
+    84                           	global	_EECON1
+    85  018C                     _EECON1	set	396
+    86                           	global	_EECON2
+    87  018D                     _EECON2	set	397
+    88                           	global	_RD
+    89  0C60                     _RD	set	3168
+    90                           	global	_WR
+    91  0C61                     _WR	set	3169
+    92                           	global	_WREN
+    93  0C62                     _WREN	set	3170
+    94                           	file	"C:\Users\ACER\AppData\Local\Temp\s4mtc."
+    95                           	line	#
+    96                           psect cinit,class=CODE,delta=2
+    97                           global start_initialization
+    98  07A7                     start_initialization:
+    99                           
+   100                           psect cinit,class=CODE,delta=2
+   101                           global end_of_initialization
+   102                           
+   103                           ;End of C runtime variable initialization code
+   104                           
+   105  07A7                     end_of_initialization:
+   106  07A7  0183               clrf status
+   107  07A8  120A  118A  2FD5   ljmp _main	;jump to C main() function
+   108                           psect	cstackCOMMON,class=COMMON,space=1
+   109                           global __pcstackCOMMON
+   110  0070                     __pcstackCOMMON:
+   111                           	global	?_pause
+   112  0070                     ?_pause:	; 0 bytes @ 0x0
+   113                           	global	?_msecbase
+   114  0070                     ?_msecbase:	; 0 bytes @ 0x0
+   115                           	global	??_msecbase
+   116  0070                     ??_msecbase:	; 0 bytes @ 0x0
+   117                           	global	?_main
+   118  0070                     ?_main:	; 0 bytes @ 0x0
+   119                           	global	pause@msvalue
+   120  0070                     pause@msvalue:	; 2 bytes @ 0x0
+   121  0070                     	ds	2
+   122                           	global	??_pause
+   123  0072                     ??_pause:	; 0 bytes @ 0x2
+   124                           	global	pause@x
+   125  0072                     pause@x:	; 2 bytes @ 0x2
+   126  0072                     	ds	2
+   127                           	global	??_main
+   128  0074                     ??_main:	; 0 bytes @ 0x4
+   129 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+   130 ;;Auto spaces:   Size  Autos    Used
+   131 ;; COMMON          14      4       4
+   132 ;; BANK0           80      0       0
+   133 ;; BANK1           80      0       0
+   134 ;; BANK3           96      0       0
+   135 ;; BANK2           96      0       0
+   136                           
+   137 ;;
+   138 ;; Pointer list with targets:
+   139                           
+   140                           
+   141                           
+   142 ;;
+   143 ;; Critical Paths under _main in COMMON
+   144 ;;
+   145 ;;   _main->_pause
+   146 ;;
+   147 ;; Critical Paths under _main in BANK0
+   148 ;;
+   149 ;;   None.
+   150 ;;
+   151 ;; Critical Paths under _main in BANK1
+   152 ;;
+   153 ;;   None.
+   154 ;;
+   155 ;; Critical Paths under _main in BANK3
+   156 ;;
+   157 ;;   None.
+   158 ;;
+   159 ;; Critical Paths under _main in BANK2
+   160 ;;
+   161 ;;   None.
+   162                           
+   163 ;;
+   164 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   165 ;;
+   166                           
+   167 ;;
+   168 ;;Call Graph Tables:
+   169 ;;
+   170 ;; ---------------------------------------------------------------------------------
+   171 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   172 ;; ---------------------------------------------------------------------------------
+   173 ;; (0) _main                                                 0     0      0      30
+   174 ;;                              _pause
+   175 ;; ---------------------------------------------------------------------------------
+   176 ;; (1) _pause                                                4     2      2      30
+   177 ;;                                              0 COMMON     4     2      2
+   178 ;;                           _msecbase
+   179 ;; ---------------------------------------------------------------------------------
+   180 ;; (2) _msecbase                                             0     0      0       0
+   181 ;; ---------------------------------------------------------------------------------
+   182 ;; Estimated maximum stack depth 2
+   183 ;; ---------------------------------------------------------------------------------
+   184                           
+   185 ;; Call Graph Graphs:
+   186                           
+   187 ;; _main (ROOT)
+   188 ;;   _pause
+   189 ;;     _msecbase
+   190 ;;
+   191                           
+   192 ;; Address spaces:
+   193                           
+   194 ;;Name               Size   Autos  Total    Cost      Usage
+   195 ;;BITCOMMON            E      0       0       0        0.0%
+   196 ;;EEDATA             100      0       0       0        0.0%
+   197 ;;NULL                 0      0       0       0        0.0%
+   198 ;;CODE                 0      0       0       0        0.0%
+   199 ;;COMMON               E      4       4       1       28.6%
+   200 ;;BITSFR0              0      0       0       1        0.0%
+   201 ;;SFR0                 0      0       0       1        0.0%
+   202 ;;BITSFR1              0      0       0       2        0.0%
+   203 ;;SFR1                 0      0       0       2        0.0%
+   204 ;;STACK                0      0       2       2        0.0%
+   205 ;;ABS                  0      0       0       3        0.0%
+   206 ;;BITBANK0            50      0       0       4        0.0%
+   207 ;;BITSFR3              0      0       0       4        0.0%
+   208 ;;SFR3                 0      0       0       4        0.0%
+   209 ;;BANK0               50      0       0       5        0.0%
+   210 ;;BITSFR2              0      0       0       5        0.0%
+   211 ;;SFR2                 0      0       0       5        0.0%
+   212 ;;BITBANK1            50      0       0       6        0.0%
+   213 ;;BANK1               50      0       0       7        0.0%
+   214 ;;BITBANK3            60      0       0       8        0.0%
+   215 ;;BANK3               60      0       0       9        0.0%
+   216 ;;BITBANK2            60      0       0      10        0.0%
+   217 ;;BANK2               60      0       0      11        0.0%
+   218 ;;DATA                 0      0       0      12        0.0%
+   219                           
+   220                           	global	_main
+   221                           psect	maintext,global,class=CODE,delta=2
+   222                           global __pmaintext
+   223  07D5                     __pmaintext:
+   224                           
+   225 ;; *************** function _main *****************
+   226 ;; Defined at:
+   227 ;;		line 9 in file "main.c"
+   228 ;; Parameters:    Size  Location     Type
+   229 ;;		None
+   230 ;; Auto vars:     Size  Location     Type
+   231 ;;		None
+   232 ;; Return value:  Size  Location     Type
+   233 ;;		None               void
+   234 ;; Registers used:
+   235 ;;		wreg, status,2, status,0, pclath, cstack
+   236 ;; Tracked objects:
+   237 ;;		On entry : 17F/0
+   238 ;;		On exit  : 0/0
+   239 ;;		Unchanged: 0/0
+   240 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   241 ;;      Params:         0       0       0       0       0
+   242 ;;      Locals:         0       0       0       0       0
+   243 ;;      Temps:          0       0       0       0       0
+   244 ;;      Totals:         0       0       0       0       0
+   245 ;;Total ram usage:        0 bytes
+   246 ;; Hardware stack levels required when called:    2
+   247 ;; This function calls:
+   248 ;;		_pause
+   249 ;; This function is called by:
+   250 ;;		Startup code after reset
+   251 ;; This function uses a non-reentrant model
+   252 ;;
+   253                           psect	maintext
+   254                           	file	"main.c"
+   255                           	line	9
+   256                           	global	__size_of_main
+   257  002B                     	__size_of_main	equ	__end_of_main-_main
+   258                           	
+   259  07D5                     _main:	
+   260                           	opt	stack 6
+   261                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   262                           	line	10
+   263                           	
+   264  07D5                     l3265:	
+   265                           ;main.c: 10: ANSEL = 0x00;
+   266  07D5  1683               	bsf	status, 5	;RP0=1, select bank3
+   267  07D6  1703               	bsf	status, 6	;RP1=1, select bank3
+   268  07D7  0188               	clrf	(392)^0180h	;volatile
+   269                           	line	11
+   270                           ;main.c: 11: TRISC = 0x00;
+   271  07D8  1683               	bsf	status, 5	;RP0=1, select bank1
+   272  07D9  1303               	bcf	status, 6	;RP1=0, select bank1
+   273  07DA  0187               	clrf	(135)^080h	;volatile
+   274                           	line	12
+   275                           ;main.c: 12: TRISB = 0x00;
+   276  07DB  0186               	clrf	(134)^080h	;volatile
+   277                           	line	13
+   278                           ;main.c: 13: PORTC = 0x00;
+   279  07DC  1283               	bcf	status, 5	;RP0=0, select bank0
+   280  07DD  1303               	bcf	status, 6	;RP1=0, select bank0
+   281  07DE  0187               	clrf	(7)	;volatile
+   282                           	line	14
+   283                           ;main.c: 14: PORTB = 0x00;
+   284  07DF  0186               	clrf	(6)	;volatile
+   285  07E0  2FE1               	goto	l3267
+   286                           	line	16
+   287                           ;main.c: 16: while(1){
+   288                           	
+   289  07E1                     l1029:	
+   290                           	line	17
+   291                           	
+   292  07E1                     l3267:	
+   293                           ;main.c: 17: RC0 = 1;
+   294  07E1  1283               	bcf	status, 5	;RP0=0, select bank0
+   295  07E2  1303               	bcf	status, 6	;RP1=0, select bank0
+   296  07E3  1407               	bsf	(56/8),(56)&7
+   297                           	line	18
+   298                           	
+   299  07E4                     l3269:	
+   300                           ;main.c: 18: RC1 = 0;
+   301  07E4  1087               	bcf	(57/8),(57)&7
+   302                           	line	19
+   303                           	
+   304  07E5                     l3271:	
+   305                           ;main.c: 19: pause(500);
+   306  07E5  30F4               	movlw	low(01F4h)
+   307  07E6  00F0               	movwf	(?_pause)
+   308  07E7  3001               	movlw	high(01F4h)
+   309  07E8  00F1               	movwf	((?_pause))+1
+   310  07E9  120A  118A  27BA   	fcall	_pause
+              120A  118A         
+   311                           	line	21
+   312                           	
+   313  07EE                     l3273:	
+   314                           ;main.c: 21: RC0 = 0;
+   315  07EE  1283               	bcf	status, 5	;RP0=0, select bank0
+   316  07EF  1303               	bcf	status, 6	;RP1=0, select bank0
+   317  07F0  1007               	bcf	(56/8),(56)&7
+   318                           	line	22
+   319                           	
+   320  07F1                     l3275:	
+   321                           ;main.c: 22: RC1 = 1;
+   322  07F1  1487               	bsf	(57/8),(57)&7
+   323                           	line	23
+   324                           	
+   325  07F2                     l3277:	
+   326                           ;main.c: 23: pause(500);
+   327  07F2  30F4               	movlw	low(01F4h)
+   328  07F3  00F0               	movwf	(?_pause)
+   329  07F4  3001               	movlw	high(01F4h)
+   330  07F5  00F1               	movwf	((?_pause))+1
+   331  07F6  120A  118A  27BA   	fcall	_pause
+              120A  118A         
+   332  07FB  2FE1               	goto	l3267
+   333                           	line	24
+   334                           	
+   335  07FC                     l1030:	
+   336                           	line	16
+   337  07FC  2FE1               	goto	l3267
+   338                           	
+   339  07FD                     l1031:	
+   340                           	line	25
+   341                           	
+   342  07FD                     l1032:	
+   343                           	global	start
+   344  07FD  120A  118A  2800   	ljmp	start
+   345                           	opt stack 0
+   346                           GLOBAL	__end_of_main
+   347  0800                     	__end_of_main:
+   348 ;; =============== function _main ends ============
+   349                           
+   350                           	signat	_main,88
+   351                           	global	_pause
+   352                           psect	text83,local,class=CODE,delta=2
+   353                           global __ptext83
+   354  07BA                     __ptext83:
+   355                           
+   356 ;; *************** function _pause *****************
+   357 ;; Defined at:
+   358 ;;		line 32 in file "main.c"
+   359 ;; Parameters:    Size  Location     Type
+   360 ;;  msvalue         2    0[COMMON] unsigned short 
+   361 ;; Auto vars:     Size  Location     Type
+   362 ;;  x               2    2[COMMON] unsigned short 
+   363 ;; Return value:  Size  Location     Type
+   364 ;;		None               void
+   365 ;; Registers used:
+   366 ;;		wreg, status,2, status,0, pclath, cstack
+   367 ;; Tracked objects:
+   368 ;;		On entry : 0/0
+   369 ;;		On exit  : 0/0
+   370 ;;		Unchanged: 0/0
+   371 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   372 ;;      Params:         2       0       0       0       0
+   373 ;;      Locals:         2       0       0       0       0
+   374 ;;      Temps:          0       0       0       0       0
+   375 ;;      Totals:         4       0       0       0       0
+   376 ;;Total ram usage:        4 bytes
+   377 ;; Hardware stack levels used:    1
+   378 ;; Hardware stack levels required when called:    1
+   379 ;; This function calls:
+   380 ;;		_msecbase
+   381 ;; This function is called by:
+   382 ;;		_main
+   383 ;; This function uses a non-reentrant model
+   384 ;;
+   385                           psect	text83
+   386                           	file	"main.c"
+   387                           	line	32
+   388                           	global	__size_of_pause
+   389  001B                     	__size_of_pause	equ	__end_of_pause-_pause
+   390                           	
+   391  07BA                     _pause:	
+   392                           	opt	stack 6
+   393                           ; Regs used in _pause: [wreg+status,2+status,0+pclath+cstack]
+   394                           	line	33
+   395                           	
+   396  07BA                     l3257:	
+   397                           ;main.c: 33: for (unsigned short x=0; x<=msvalue; x++) msecbase();
+   398  07BA  01F2               	clrf	(pause@x)
+   399  07BB  01F3               	clrf	(pause@x+1)
+   400  07BC  2FC9               	goto	l3263
+   401                           	
+   402  07BD                     l1036:	
+   403                           	
+   404  07BD                     l3259:	
+   405  07BD  120A  118A  27AB   	fcall	_msecbase
+              120A  118A         
+   406                           	
+   407  07C2                     l3261:	
+   408  07C2  3001               	movlw	low(01h)
+   409  07C3  07F2               	addwf	(pause@x),f
+   410  07C4  1803               	skipnc
+   411  07C5  0AF3               	incf	(pause@x+1),f
+   412  07C6  3000               	movlw	high(01h)
+   413  07C7  07F3               	addwf	(pause@x+1),f
+   414  07C8  2FC9               	goto	l3263
+   415                           	
+   416  07C9                     l1035:	
+   417                           	
+   418  07C9                     l3263:	
+   419  07C9  0873               	movf	(pause@x+1),w
+   420  07CA  0271               	subwf	(pause@msvalue+1),w
+   421  07CB  1D03               	skipz
+   422  07CC  2FCF               	goto	u2235
+   423  07CD  0872               	movf	(pause@x),w
+   424  07CE  0270               	subwf	(pause@msvalue),w
+   425  07CF                     u2235:
+   426  07CF  1803               	skipnc
+   427  07D0  2FD2               	goto	u2231
+   428  07D1  2FD3               	goto	u2230
+   429  07D2                     u2231:
+   430  07D2  2FBD               	goto	l3259
+   431  07D3                     u2230:
+   432  07D3  2FD4               	goto	l1038
+   433                           	
+   434  07D4                     l1037:	
+   435                           	line	34
+   436                           	
+   437  07D4                     l1038:	
+   438  07D4  0008               	return
+   439                           	opt stack 0
+   440                           GLOBAL	__end_of_pause
+   441  07D5                     	__end_of_pause:
+   442 ;; =============== function _pause ends ============
+   443                           
+   444                           	signat	_pause,4216
+   445                           	global	_msecbase
+   446                           psect	text84,local,class=CODE,delta=2
+   447                           global __ptext84
+   448  07AB                     __ptext84:
+   449                           
+   450 ;; *************** function _msecbase *****************
+   451 ;; Defined at:
+   452 ;;		line 55 in file "main.c"
+   453 ;; Parameters:    Size  Location     Type
+   454 ;;		None
+   455 ;; Auto vars:     Size  Location     Type
+   456 ;;		None
+   457 ;; Return value:  Size  Location     Type
+   458 ;;		None               void
+   459 ;; Registers used:
+   460 ;;		wreg
+   461 ;; Tracked objects:
+   462 ;;		On entry : 0/0
+   463 ;;		On exit  : 0/0
+   464 ;;		Unchanged: 0/0
+   465 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   466 ;;      Params:         0       0       0       0       0
+   467 ;;      Locals:         0       0       0       0       0
+   468 ;;      Temps:          0       0       0       0       0
+   469 ;;      Totals:         0       0       0       0       0
+   470 ;;Total ram usage:        0 bytes
+   471 ;; Hardware stack levels used:    1
+   472 ;; This function calls:
+   473 ;;		Nothing
+   474 ;; This function is called by:
+   475 ;;		_pause
+   476 ;; This function uses a non-reentrant model
+   477 ;;
+   478                           psect	text84
+   479                           	file	"main.c"
+   480                           	line	55
+   481                           	global	__size_of_msecbase
+   482  000F                     	__size_of_msecbase	equ	__end_of_msecbase-_msecbase
+   483                           	
+   484  07AB                     _msecbase:	
+   485                           	opt	stack 6
+   486                           ; Regs used in _msecbase: [wreg]
+   487                           	line	58
+   488                           	
+   489  07AB                     l2397:	
+   490                           ;main.c: 58: OPTION_REG = 0b00000001;
+   491  07AB  3001               	movlw	(01h)
+   492  07AC  1683               	bsf	status, 5	;RP0=1, select bank1
+   493  07AD  1303               	bcf	status, 6	;RP1=0, select bank1
+   494  07AE  0081               	movwf	(129)^080h	;volatile
+   495                           	line	59
+   496                           ;main.c: 59: TMR0 = 0x0D;
+   497  07AF  300D               	movlw	(0Dh)
+   498  07B0  1283               	bcf	status, 5	;RP0=0, select bank0
+   499  07B1  1303               	bcf	status, 6	;RP1=0, select bank0
+   500  07B2  0081               	movwf	(1)	;volatile
+   501                           	line	60
+   502                           ;main.c: 60: while(!T0IF);
+   503  07B3  2FB4               	goto	l1041
+   504                           	
+   505  07B4                     l1042:	
+   506                           	
+   507  07B4                     l1041:	
+   508  07B4  1D0B               	btfss	(90/8),(90)&7
+   509  07B5  2FB7               	goto	u11
+   510  07B6  2FB8               	goto	u10
+   511  07B7                     u11:
+   512  07B7  2FB4               	goto	l1041
+   513  07B8                     u10:
+   514                           	
+   515  07B8                     l1043:	
+   516                           	line	61
+   517                           ;main.c: 61: T0IF = 0;
+   518  07B8  110B               	bcf	(90/8),(90)&7
+   519                           	line	62
+   520                           	
+   521  07B9                     l1044:	
+   522  07B9  0008               	return
+   523                           	opt stack 0
+   524                           GLOBAL	__end_of_msecbase
+   525  07BA                     	__end_of_msecbase:
+   526 ;; =============== function _msecbase ends ============
+   527                           
+   528                           	signat	_msecbase,88
+   529                           psect	text85,local,class=CODE,delta=2
+   530                           global __ptext85
+   531  0000                     __ptext85:
+   532                           	global	btemp
+   533  007E                     	btemp set 07Eh
+   534                           
+   535                           	DABS	1,126,2	;btemp
+   536                           	global	wtemp0
+   537  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.82 build 9453 
+Symbol Table                                                                                   Sun May 05 21:37:06 2019
+
+                  _RD 0C60                    u10 07B8                    u11 07B7                    _WR 0C61  
+                 _GIE 005F                   _RC0 0038                   _RC1 0039                  l1030 07FC  
+                l1031 07FD                  l1032 07FD                  l1041 07B4                  l1042 07B4  
+                l1043 07B8                  l1035 07C9                  l1044 07B9                  l1036 07BD  
+                l1037 07D4                  l1029 07E1                  l1038 07D4                  l3261 07C2  
+                l3263 07C9                  l3271 07E5                  l3257 07BA                  l3273 07EE  
+                l3265 07D5                  l3259 07BD                  l3275 07F1                  l3267 07E1  
+                l2397 07AB                  l3277 07F2                  l3269 07E4                  _T0IF 005A  
+                u2230 07D3                  u2231 07D2                  u2235 07CF                  _TMR0 0001  
+                _WREN 0C62                  _main 07D5                  btemp 007E                  start 0000  
+               ?_main 0070                 _EEADR 010D                 _CARRY 0018                 _ANSEL 0188  
+               _PORTB 0006                 _PORTC 0007                 _TRISB 0086                 _TRISC 0087  
+               _pause 07BA                 status 0003                 wtemp0 007E          __end_of_main 0800  
+              ??_main 0074                _EEDATA 010C                ?_pause 0070                _EECON1 018C  
+              _EECON2 018D      __end_of_msecbase 07BA                pause@x 0072        __pcstackCOMMON 0070  
+       __end_of_pause 07D5               ??_pause 0072            __pmaintext 07D5             ?_msecbase 0070  
+end_of_initialization 07A7            ??_msecbase 0070   start_initialization 07A7          pause@msvalue 0070  
+   __size_of_msecbase 000F        __size_of_pause 001B              __ptext82 0000              __ptext83 07BA  
+            __ptext84 07AB              __ptext85 0000         __size_of_main 002B              _msecbase 07AB  
+          _OPTION_REG 0081  
