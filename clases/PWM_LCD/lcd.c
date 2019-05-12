@@ -1,66 +1,71 @@
 #include<htc.h>
-#include<stdio.h>
 
-__CONFIG (FOSC_INTRC_NOCLKOUT & WDTE_OFF & PWRTE_OFF & MCLRE_OFF & CP_OFF & CPD_OFF & BOREN_OFF & IESO_OFF & FCMEN_OFF & LVP_OFF & DEBUG_OFF);
-__CONFIG (BOR4V_BOR40V & WRT_OFF);
+#define	LCD_RS RB0
+#define LCD_EN RB1
+#define LCD_DATA	PORTD
+#define	LCD_STROBE()	((LCD_EN = 1),(LCD_EN=0))
 
-/*
- *  El programma mide el voltaje de los canales AN0:AN3 (RA0:RA4 respectivamente). 
- *  Cada voltaje medido se muestra en una LCD de 16x2 con la siguiente configuración: 
- *  Modo 4 Bits: Nible menor del PORTC.  
- *  RW a tierra. 
- *  RS: RB0 
- *  Enable: RB1 
- */
+void msecbase(){
+    //La siguiente línea fue la única que se cambió. Antes estaba como OPTION. 
+    //En el PIC16F887 se llama OPTION_REG.
+	OPTION_REG = 0b00000001;		//Set prescaler to TMRO 1:4
+	TMR0 = 0x07;					//Preset TMRO to overflow on 250 counts
+	while(!T0IF);				//Stay until TMRO overflow flag equals 1
+	T0IF = 0;					//Clear the TMR0 overflow flag
+}
 
-void msecbase(void); //Retardo de un ms. 
-void pause(unsigned short msvalue); //Retardo de msvalue ms. 
-void lcd_write(unsigned char); //Función que escribe (sin formato) en la LCD.
-void lcd_clear(void); //Función que limpia la LCD.
-void lcd_goto(unsigned char); //Función que mueve el cursor de la LCD.
-void lcd_init(void); //Función que inicializa la LCD.
-void lcd_puts(const char *);
-int ADC(char );  //Función que realiza la conversión del canal parámetro.
-
-#define number 0x30
-
-char digitos[5]; 
-int volt = 0; //Voltaje en valor sobre 1023.
-
-void main(){
-    ANSEL = 0x0F;		//nible menos significativo del PORTA como entrada analógica
-    ANSELH = 0x00;
-    TRISA = 0x0F;		//nible menos significativo de PORTA como entrada. 
-    TRISC = 0x00;		//PORTC como salida (pines data de la LCD)
-    TRISB = 0x00;       //PORTB como salida (RE y RS)
-    ADCON0 = 0b11000000;	//Fuente Vdd y Vss para el convertidor. 
-    ADCON1 = 0x00;	//Justificado a la izquierda.
-     
-    
-    lcd_init();		//Inicializamos el LCD.
-    while (1){
-        for(int i=0; i<4; i++){ 
-            volt=ADC(i);
-            sprintf(digitos,"%4.3f", volt*0.004887585); 
-            lcd_goto(48*(i>1)+i*8);
-            lcd_puts(digitos);  
-            pause(25);
-        }
-       
-        pause(150);
-    }
+void pause( unsigned short msvalue ){
+	for (unsigned short x=0; x<=msvalue; x++) msecbase();				//Jump to millisec delay routine
 }
 
 
-int ADC(char canal){
-    ADCON0= 0xC0;  //Fuente interna, sin canal habilitado, adc deshabilitado.
-    ADCON0=ADCON0 |(canal<<2); //Se selecciona el canal. 
-    ADON=1; //Se habilita el ADC. 
-    NOP();  //Tiempo de adquisición de señal.
-    NOP(); 
-    NOP(); 
-    GO_DONE=1; //Se inicia la conversión.
-    while(GO_DONE); //Hasta que se termine la conversión.
-    ADON =0; //Se deshabilita el ADC.
-    return (ADRESH<<2)|(ADRESL>>6); //Valor del voltaje convertido sobre 1023
+
+void lcd_write(unsigned char c) {
+	pause (1);
+	LCD_DATA = ( ( c >> 4 ) & 0x0F );
+	LCD_STROBE();
+	LCD_DATA = ( c & 0x0F );
+	LCD_STROBE();
+	
 }
+
+void lcd_clear(){
+	LCD_RS = 0;
+	lcd_write(0x1);
+	pause (2);
+}
+
+void lcd_goto(unsigned char pos){
+	LCD_RS = 0;
+	lcd_write(0x80+pos);
+}
+
+void lcd_init(){
+	char init_value;
+	init_value = 0x3;
+	TRISB=0;
+	TRISC=0;
+	LCD_RS = 0;
+	LCD_EN = 0;
+	pause (15);				
+	LCD_DATA	 = init_value;
+	LCD_STROBE();
+	pause(10);
+	LCD_STROBE();
+	pause(10);
+	LCD_STROBE();
+	pause(10);
+	LCD_DATA = 2;	//Modo de 4 bits.
+	LCD_STROBE();
+	
+	lcd_write(0x28); //Se establece el tamaño de la interfaz.
+	lcd_write(0xC); //Display encendido, cursor encendido, modo blink. 
+	lcd_clear();	
+	lcd_write(0x6); //Se establece el modo de entrada.
+}
+
+void lcd_puts(const char * s){
+	LCD_RS = 1;	// write characters
+	while(*s) lcd_write(*s++);
+}
+
