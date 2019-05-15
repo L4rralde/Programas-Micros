@@ -1,0 +1,6 @@
+Puedes simualr USART en proteus usando una terminal virtual. 
+Yo construiré el circuito usando un convertidor serial a USB ftdi232, se puede usar el módulo 
+bluetooth pero hay que considerarse los tiempos de retardo para que funcionen bien. El módulo
+bluetooth debe configurarse antes de usar, puede hacerse con el PIC. El convertidor no lo 
+requiere, en ambos casos recomiendo habilitar el MASTER CLEAR. 
+
