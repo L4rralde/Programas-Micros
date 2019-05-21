@@ -26,7 +26,7 @@ def main(salto):
 main(1)
 main(1)
 while True: 
-	main(0)
+	#main(0)
 	salida=raw_input(">>")+"\n"
 	for x in salida: 
 		ser.write(x)
